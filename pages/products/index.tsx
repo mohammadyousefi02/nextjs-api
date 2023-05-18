@@ -1,6 +1,11 @@
 import Link from 'next/link'
 import React from 'react'
 
+// import Button from '@/components/page/products/button'
+// import ProductItem from '@/components/page/products/productItem'
+
+import { ProductItem, Button } from "@/components/page/products"
+
 function Products() {
   return (
     <div>
