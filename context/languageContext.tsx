@@ -2,9 +2,12 @@ import { createContext, useContext, useState } from "react";
 
 type Language = Record<string, string>;
 
+import { fa, en } from "../languages";
+
 interface Value {
   language: Language;
   changeLanguage: (language: "fa" | "en") => void;
+  direction: "ltr" | "rtl"
 }
 
 const languageContext = createContext<Value | null>(null);
@@ -16,26 +19,23 @@ interface Props {
 }
 
 export function LanguageProvider({ children }: Props) {
-  const fa: Language = {
-    home: "خانه",
-    aboutUs: "درباره ما"
-  };
-
-  const en: Language = {
-    home: "home",
-    aboutUs: "about us"
-  };
-
   const [language, setLanguage] = useState<Language>(fa);
+  const [direction, setDirection] = useState<"rtl" | "ltr">("rtl");
 
   const changeLanguage = (language: "fa" | "en") => {
-    if(language === "fa") setLanguage(fa)
-    else setLanguage(en)
-  }
+    if (language === "fa") {
+      setLanguage(fa);
+      setDirection("rtl");
+    } else {
+      setLanguage(en);
+      setDirection("ltr");
+    }
+  };
 
   const value: Value = {
     language,
     changeLanguage,
+    direction
   };
 
   return (
